@@ -1,34 +1,130 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Roboinhood clone blockchain
 
-## Getting Started
 
-First, run the development server:
+## Sanity
+    https://www.sanity.io/
+    cd studio
+    npm install -g @sanity/cli
+    sanity init --coupon cleverprogrammer
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+    create schema under studio/schemas
+    sanity start
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    create .env
+    SANITY_PROJECT_ID = xxxx
+    SANITY_TOKEN = yyyy
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Moralis
+   https://www.moralis.io
+   npm install react-moralis
+   npm install moralis
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Netlify
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Tailwind 
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
 
-## Learn More
+   edit tailwind.config.js and replace following configuration
+            module.exports = {
+                content: [
+                    './pages/**/*.{js,ts,jsx,tsx}',
+                    './components/**/*.{js,ts,jsx,tsx}',
+                ],
+                theme: {
+                    extend: {},
+                },
+                plugins: [],
+                }
 
-To learn more about Next.js, take a look at the following resources:
+    edit styles/globals.css and add following css library
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## React
+   npm install react-icons
+   npm install react-chartjs-2
+   npm install @sanity/client
+   npm install axios
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Web 3 library
+    npm install @web3auth/web3auth magic-sdk @magic-sdk/types @walletconnect/web3-provider
 
-## Deploy on Vercel
+## Environment variable
+   Create .env file as below
+        SANITY_PROJECT_ID = y9u9wurs
+        SANITY_TOKEN = 
+        NEXT_PUBLIC_MORALIS_SERVER_URL =
+        NEXT_PUBLIC_MORALIS_APP_ID = 
+        MORALIS_MASTER_KEY = 
+        ALCHEMY_API_URL = 
+        WALLET_PRIVATE_KEY =
+        COIN_RANKING_HOST =
+        COIN_RANKING_KEY =
+    
+    Remark: NEXT_PUBLIC_ prefix is used by Next.js
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Use environement variable (e.g)
+     process.env.SANITY_PROJECT_ID
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    Files on the left have more priority than files on the right:
+
+        npm start: .env.development.local, .env.local, .env.development, .env
+        npm run build: .env.production.local, .env.local, .env.production, .env
+        npm test: .env.test.local, .env.test, .env (note .env.local is missing)
+
+## Setup hardhat
+   cd smart-contract
+   npx hardhat
+    > Create a basic sample project
+    select smart-contract folder
+    
+    npm install @openzeppelin/contracts dotenv @nomiclabs/hardhat-waffle chai ethereum-waffle ethers hardhat
+
+    update hardhat.config.js
+
+## Setup Alchemy
+   https://www.alchemy.com/
+
+   login and create new project called 
+    roboinhood-clone-blockchain
+
+   cd smart-contract
+   create .env with your ALCHEMY API and RINKEBY private key
+     ALCHEMY_API_URL =
+     RINKEBY_PRIVATE_KEY = 
+
+   npx hardhat run scripts/deploy.js --network rinkeby
+
+   Markdown the contract address of each coin
+        Dogecoin deployed to: 0xb633f55f9e03267800f827B319075604FFC069b9
+        LinkToken deployed to: 0x98091c2EE3C68eD2e6A1Cb285040D69341f4855c
+        DaiToken deployed to: 0xB84f33d8a6e0FCd63AD7877CBc5CD24ce46268BA
+        UsdcToken deployed to: 0x4fcfF24771fAd0447FD7183De9AA3e17756A36e9
+   
+## Rinkeby test blockchain network
+   Get testing etherum token
+   https://faucets.chain.link/rinkeby
+
+## smart-contract deployment
+    cd smart-contract   
+    npx hardhat run scripts/deploy.js --network rinkeby
+
+    TINDER CONTRACT ADDRESS:  0x8bd5E9363c68c405105383e00c713D0b2eBC6B58
+
+    update Contract address at lib/constants.js
+
+    copy smart-contract/artifacts/contracts/TinderERC721.json to lib/TinderERC721.json folder
+
+## RapidAPI - Coin Ranking API
+    https://rapidapi.com
+
+    update .env
+    COIN_RANKING_HOST=coinranking1.p.rapidapi.com
+    COIN_RANKING_KEY=
+
+## Shortcut (with ES7+ React Snippets)
+   Create Components - rafce
+## Reference
+https://www.youtube.com/watch?v=iMst9GE8wIM&t=1051s
